@@ -27,7 +27,7 @@ public class Body
 		this.vz = vz;
 	}
 	
-	public double getDistance(Body other)
+	public double distanceFrom(Body other)
 	{
 		return Math.sqrt(x * x + y * y + z * z);
 	}
