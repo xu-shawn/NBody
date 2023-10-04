@@ -91,7 +91,7 @@
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>
-										org.shawn.mathtools.sequences.App</mainClass>
+										org.shawn.mathtools.NBody.App</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>
