@@ -43,6 +43,26 @@ public class Body
 	
 	public double distanceFrom(Body other)
 	{
+		return Math.sqrt((x - other.x) * (x - other.x) + (y - other.y) * (y - other.y) + (z - other.z) * (z - other.z));
+	}
+	
+	public double getSpeed()
+	{
+		return Math.sqrt(vx * vx + vy * vy + vz * vz);
+	}
+	
+	public double getX()
+	{
+		return x;
+	}
+
+	public void setX(double x)
+	{
+		this.x = x;
+	}
+	
+	public double getY()
+	{
 		return y;
 	}
 
