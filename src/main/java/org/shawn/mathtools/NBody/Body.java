@@ -64,7 +64,7 @@ public class Body
 
 	public RealVector gravityFrom(List<Body> others)
 	{
-		return others.stream().map(other -> this.gravityFrom(other)).reduce(RealVector::add)
+		return others.stream().map(this::gravityFrom).reduce(RealVector::add)
 				.orElse(new ArrayRealVector(new double[] { 0, 0, 0 }));
 	}
 
