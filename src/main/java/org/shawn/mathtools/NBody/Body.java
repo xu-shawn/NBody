@@ -8,6 +8,7 @@ public class Body
 {
 	private RealVector pos;
 	private RealVector vel;
+	private RealVector acl;
 
 	private double mass;
 
@@ -46,8 +47,14 @@ public class Body
 
 	public Body(RealVector pos, RealVector vel, double mass)
 	{
+		this(pos, vel, new ArrayRealVector(new double[] { 0, 0, 0 }), mass);
+	}
+
+	public Body(RealVector pos, RealVector vel, RealVector acl, double mass)
+	{
 		this.pos = pos;
 		this.vel = vel;
+		this.acl = acl;
 		this.mass = mass;
 	}
 
@@ -68,9 +75,16 @@ public class Body
 				.orElse(new ArrayRealVector(new double[] { 0, 0, 0 }));
 	}
 
-	public void update(double deltaTime)
+	public void update_noGravity(double deltaTime)
 	{
 		pos = pos.add(vel.mapMultiply(deltaTime));
+		vel = vel.add(acl.mapMultiply(deltaTime));
+	}
+
+	public void update(double deltaTime, List<Body> others)
+	{
+		update_noGravity(deltaTime);
+		acl = gravityFrom(others).mapDivide(mass);
 	}
 
 	public RealVector getPos()
@@ -101,5 +115,15 @@ public class Body
 	public void setMass(double mass)
 	{
 		this.mass = mass;
+	}
+
+	public RealVector getAcl()
+	{
+		return acl;
+	}
+
+	public void setAcl(RealVector acl)
+	{
+		this.acl = acl;
 	}
 }
