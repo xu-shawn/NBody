@@ -3,42 +3,44 @@ package org.shawn.mathtools.NBody;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealVector;
 
-//TODO: Implement speed using JScience
 public class Body
 {
 	private RealVector pos;
 	private RealVector vel;
-	
+
 	private double mass;
-	
+
+	public static final double G = 6.6743;
+
 	public Body()
 	{
 		this(0, 0, 0);
 	}
-	
+
 	public Body(double x, double y, double z)
 	{
 		this(x, y, z, 1);
 	}
-	
+
 	public Body(double x, double y, double z, double mass)
 	{
 		this(x, y, z, 0, 0, 0, mass);
 	}
-	
+
 	public Body(double x, double y, double z, double vx, double vy, double vz)
 	{
 		this(x, y, z, vx, vy, vz, 1);
 	}
-	
+
 	public Body(RealVector pos, RealVector vel)
 	{
 		this(pos, vel, 1);
 	}
-	
+
 	public Body(double x, double y, double z, double vx, double vy, double vz, double mass)
 	{
-		this(new ArrayRealVector(new double[] {x, y, z}), new ArrayRealVector(new double[] {vx, vy, vz}), mass);
+		this(new ArrayRealVector(new double[] { x, y, z }),
+				new ArrayRealVector(new double[] { vx, vy, vz }), mass);
 	}
 
 	public Body(RealVector pos, RealVector vel, double mass)
@@ -47,12 +49,18 @@ public class Body
 		this.vel = vel;
 		this.mass = mass;
 	}
-	
+
 	public double distanceFrom(Body other)
 	{
 		return this.pos.getDistance(other.getPos());
 	}
-	
+
+	public RealVector gravityFrom(Body other)
+	{
+		return other.getPos().subtract(this.getPos()).unitVector()
+				.mapMultiply(G * (this.getMass() + other.getMass()) / this.distanceFrom(other));
+	}
+
 	public void update(double deltaTime)
 	{
 		pos = pos.add(vel.mapMultiply(deltaTime));
