@@ -30,6 +30,11 @@ public class Body
 	{
 		this(new ArrayRealVector(new double[] {x, y, z}), new ArrayRealVector(new double[] {vx, vy, vz}), mass);
 	}
+	
+	public Body(RealVector pos, RealVector vel)
+	{
+		this(pos, vel, 1);
+	}
 
 	public Body(RealVector pos, RealVector vel, double mass)
 	{
