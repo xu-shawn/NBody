@@ -11,6 +11,7 @@ public class Body
 	private RealVector acl;
 
 	private double mass;
+	private double radius;
 
 	public static final double G = 6.6743;
 
@@ -34,23 +35,18 @@ public class Body
 		this(x, y, z, vx, vy, vz, 1);
 	}
 
-	public Body(RealVector pos, RealVector vel)
-	{
-		this(pos, vel, 1);
-	}
-
 	public Body(double x, double y, double z, double vx, double vy, double vz, double mass)
 	{
 		this(new ArrayRealVector(new double[] { x, y, z }),
-				new ArrayRealVector(new double[] { vx, vy, vz }), mass);
+				new ArrayRealVector(new double[] { vx, vy, vz }), mass, 1);
 	}
 
-	public Body(RealVector pos, RealVector vel, double mass)
+	public Body(RealVector pos, RealVector vel, double mass, double radius)
 	{
-		this(pos, vel, new ArrayRealVector(new double[] { 0, 0, 0 }), mass);
+		this(pos, vel, new ArrayRealVector(new double[] { 0, 0, 0 }), mass, radius);
 	}
 
-	public Body(RealVector pos, RealVector vel, RealVector acl, double mass)
+	public Body(RealVector pos, RealVector vel, RealVector acl, double mass, double radius)
 	{
 		this.pos = pos;
 		this.vel = vel;
