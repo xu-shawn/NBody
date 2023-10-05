@@ -1,15 +1,13 @@
 package org.shawn.mathtools.NBody;
 
+import org.apache.commons.math3.linear.ArrayRealVector;
+import org.apache.commons.math3.linear.RealVector;
+
 //TODO: Implement speed using JScience
 public class Body
 {
-	private double x;
-	private double y;
-	private double z;
-
-	private double vx;
-	private double vy;
-	private double vz;
+	private RealVector pos;
+	private RealVector vel;
 	
 	private double mass;
 	
@@ -30,85 +28,44 @@ public class Body
 	
 	public Body(double x, double y, double z, double vx, double vy, double vz, double mass)
 	{
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		
-		this.vx = vx;
-		this.vy = vy;
-		this.vz = vz;
-		
+		this(new ArrayRealVector(new double[] {x, y, z}), new ArrayRealVector(new double[] {vx, vy, vz}), mass);
+	}
+
+	public Body(RealVector pos, RealVector vel, double mass)
+	{
+		this.pos = pos;
+		this.vel = vel;
 		this.mass = mass;
 	}
 	
 	public double distanceFrom(Body other)
 	{
-		return Math.sqrt((x - other.x) * (x - other.x) + (y - other.y) * (y - other.y) + (z - other.z) * (z - other.z));
+		return this.pos.getDistance(other.getPos());
 	}
 	
-	public double getSpeed()
+	public void update(double deltaTime)
 	{
-		return Math.sqrt(vx * vx + vy * vy + vz * vz);
-	}
-	
-	public double getX()
-	{
-		return x;
+		pos = pos.add(vel.mapMultiply(deltaTime));
 	}
 
-	public void setX(double x)
+	public RealVector getPos()
 	{
-		this.x = x;
-	}
-	
-	public double getY()
-	{
-		return y;
+		return pos;
 	}
 
-	public void setY(double y)
+	public void setPos(RealVector pos)
 	{
-		this.y = y;
+		this.pos = pos;
 	}
 
-	public double getZ()
+	public RealVector getVel()
 	{
-		return z;
+		return vel;
 	}
 
-	public void setZ(double z)
+	public void setVel(RealVector vel)
 	{
-		this.z = z;
-	}
-
-	public double getVx()
-	{
-		return vx;
-	}
-
-	public void setVx(double vx)
-	{
-		this.vx = vx;
-	}
-
-	public double getVy()
-	{
-		return vy;
-	}
-
-	public void setVy(double vy)
-	{
-		this.vy = vy;
-	}
-
-	public double getVz()
-	{
-		return vz;
-	}
-
-	public void setVz(double vz)
-	{
-		this.vz = vz;
+		this.vel = vel;
 	}
 
 	public double getMass()
