@@ -5,15 +5,17 @@ import java.util.*;
 public class BodyManager
 {
 	List<Body> bodies;
+	double currTime;
 	
 	public BodyManager()
 	{
-		this.bodies = new ArrayList<>();
+		this(new ArrayList<>());
 	}
 	
 	public BodyManager(List<Body> bodies)
 	{
 		this.bodies = bodies;
+		this.currTime = 0;
 	}
 
 	public List<Body> getBodies()
@@ -24,5 +26,11 @@ public class BodyManager
 	public void setBodies(List<Body> bodies)
 	{
 		this.bodies = bodies;
+	}
+	
+	public void update(double deltaTime)
+	{
+		this.currTime += deltaTime;
+		bodies.stream().forEach(body -> body.update(deltaTime, this.bodies));
 	}
 }
