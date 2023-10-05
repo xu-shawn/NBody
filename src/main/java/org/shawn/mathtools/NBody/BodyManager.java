@@ -22,11 +22,6 @@ public class BodyManager
 	{
 		return bodies;
 	}
-
-	public void setBodies(List<Body> bodies)
-	{
-		this.bodies = bodies;
-	}
 	
 	public void update(double deltaTime)
 	{
