@@ -17,6 +17,12 @@ public class BodyManager
 		this.bodies = bodies;
 		this.currTime = 0;
 	}
+	
+	public BodyManager(BodyManager other)
+	{
+		this.bodies = new ArrayList<>(other.bodies);
+		this.currTime = 0;
+	}
 
 	public List<Body> getBodies()
 	{
