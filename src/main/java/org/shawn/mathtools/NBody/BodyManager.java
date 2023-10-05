@@ -15,4 +15,14 @@ public class BodyManager
 	{
 		this.bodies = bodies;
 	}
+
+	public List<Body> getBodies()
+	{
+		return bodies;
+	}
+
+	public void setBodies(List<Body> bodies)
+	{
+		this.bodies = bodies;
+	}
 }
