@@ -2,6 +2,7 @@ package org.shawn.mathtools.NBody;
 
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealVector;
+import java.util.*;
 
 public class Body
 {
@@ -59,6 +60,12 @@ public class Body
 	{
 		return other.getPos().subtract(this.getPos()).unitVector()
 				.mapMultiply(G * (this.getMass() + other.getMass()) / this.distanceFrom(other));
+	}
+
+	public RealVector gravityFrom(List<Body> others)
+	{
+		return others.stream().map(other -> this.gravityFrom(other)).reduce(RealVector::add)
+				.orElse(new ArrayRealVector(new double[] { 0, 0, 0 }));
 	}
 
 	public void update(double deltaTime)
