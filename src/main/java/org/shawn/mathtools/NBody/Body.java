@@ -11,9 +11,14 @@ public class Body
 	
 	private double mass;
 	
+	public Body()
+	{
+		this(0, 0, 0);
+	}
+	
 	public Body(double x, double y, double z)
 	{
-		this(x, y, z, 0, 0, 0, 1);
+		this(x, y, z, 1);
 	}
 	
 	public Body(double x, double y, double z, double mass)
@@ -26,14 +31,14 @@ public class Body
 		this(x, y, z, vx, vy, vz, 1);
 	}
 	
-	public Body(double x, double y, double z, double vx, double vy, double vz, double mass)
-	{
-		this(new ArrayRealVector(new double[] {x, y, z}), new ArrayRealVector(new double[] {vx, vy, vz}), mass);
-	}
-	
 	public Body(RealVector pos, RealVector vel)
 	{
 		this(pos, vel, 1);
+	}
+	
+	public Body(double x, double y, double z, double vx, double vy, double vz, double mass)
+	{
+		this(new ArrayRealVector(new double[] {x, y, z}), new ArrayRealVector(new double[] {vx, vy, vz}), mass);
 	}
 
 	public Body(RealVector pos, RealVector vel, double mass)
