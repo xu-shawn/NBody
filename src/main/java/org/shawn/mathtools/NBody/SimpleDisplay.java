@@ -7,7 +7,7 @@ public class SimpleDisplay
 {
 	enum Pixel
 	{
-		On('*'), Off(' ');
+		On('*'), Off('_');
 
 		public final Character value;
 
@@ -20,9 +20,9 @@ public class SimpleDisplay
 	private BodyManager bodies = new BodyManager();
 	private Pixel[][] pixels;
 
-	public SimpleDisplay(int w, int h)
+	public SimpleDisplay(int h, int w)
 	{
-		pixels = new Pixel[w][h];
+		pixels = new Pixel[h][w];
 		Arrays.stream(pixels).forEach(line -> Arrays.fill(line, Pixel.Off));
 	}
 
@@ -42,7 +42,7 @@ public class SimpleDisplay
 		{
 			int xpos = (int) Math.round(body.getPos().getEntry(0) + xaxis);
 			int ypos = (int) Math.round(body.getPos().getEntry(1) + yaxis);
-			if (xpos >= 0 && xpos < pixels.length && ypos >= 0 && ypos < pixels[0].length)
+			if (xpos >= 0 && xpos < pixels[0].length && ypos >= 0 && ypos < pixels.length)
 			{
 				pixels[ypos][xpos] = Pixel.On;
 			}
