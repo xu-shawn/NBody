@@ -23,7 +23,7 @@ public class SimpleDisplay
 	public SimpleDisplay(int w, int h)
 	{
 		pixels = new Pixel[h][w];
-		Arrays.fill(pixels, Pixel.Off);
+		Arrays.stream(pixels).forEach(line -> Arrays.fill(line, Pixel.Off));
 	}
 
 	public BodyManager getBodyManager()
