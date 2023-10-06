@@ -34,15 +34,15 @@ public class SimpleDisplay
 	public void redraw()
 	{
 		Arrays.stream(pixels).forEach(line -> Arrays.fill(line, Pixel.Off));
-		
+
 		double xaxis = pixels[0].length / 2.0;
 		double yaxis = pixels.length / 2.0;
-		
-		for(Body body : bodies.getBodies()) 
+
+		for (Body body : bodies.getBodies())
 		{
 			int xpos = (int) Math.round(body.getPos().getEntry(0) + xaxis);
 			int ypos = (int) Math.round(body.getPos().getEntry(1) + yaxis);
-			if(xpos >= 0 && xpos < pixels[0].length && ypos >= 0 && ypos < pixels[0].length)
+			if (xpos >= 0 && xpos < pixels[0].length && ypos >= 0 && ypos < pixels[0].length)
 			{
 				pixels[xpos][ypos] = Pixel.On;
 			}
