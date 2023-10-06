@@ -33,7 +33,7 @@ public class SimpleDisplay
 
 	public void redraw()
 	{
-		Arrays.fill(pixels, Pixel.Off);
+		Arrays.stream(pixels).forEach(line -> Arrays.fill(line, Pixel.Off));
 		
 		double xaxis = pixels[0].length / 2.0;
 		double yaxis = pixels.length / 2.0;
@@ -59,6 +59,6 @@ public class SimpleDisplay
 	{
 		return Arrays.stream(pixels).map(line -> Arrays.stream(line)
 				.map(pixel -> pixel.value.toString()).collect(Collectors.joining()))
-				.collect(Collectors.joining());
+				.collect(Collectors.joining("\n"));
 	}
 }
