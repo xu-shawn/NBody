@@ -7,7 +7,7 @@ public class SimpleDisplay
 {
 	enum Pixel
 	{
-		On('*'), Off('_');
+		On('*'), Off(' ');
 
 		public final Character value;
 
