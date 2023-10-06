@@ -82,8 +82,8 @@ public class Body
 
 	public void updatePositionVelocity(double deltaTime)
 	{
-		pos = pos.add(vel.mapMultiply(deltaTime));
 		vel = vel.add(acl.mapMultiply(deltaTime));
+		pos = pos.add(vel.mapMultiply(deltaTime));
 	}
 
 	public RealVector getPos()
