@@ -20,9 +20,9 @@ public class SimpleDisplay
 	private BodyManager bodies = new BodyManager();
 	private Pixel[][] pixels;
 
-	public SimpleDisplay(int h, int w)
+	public SimpleDisplay(int width, int height)
 	{
-		pixels = new Pixel[h][w];
+		pixels = new Pixel[height][width];
 		Arrays.stream(pixels).forEach(line -> Arrays.fill(line, Pixel.Off));
 	}
 
