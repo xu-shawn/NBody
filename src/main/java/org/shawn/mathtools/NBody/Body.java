@@ -61,6 +61,10 @@ public class Body
 
 	public RealVector gravityFrom(Body other)
 	{
+		if (this.getPos().equals(other.getPos()))
+		{
+			return new ArrayRealVector(new double[] { 0, 0, 0 });
+		}
 		return other.getPos().subtract(this.getPos()).unitVector()
 				.mapMultiply(G * (this.getMass() + other.getMass()) / this.distanceFrom(other));
 	}
@@ -70,17 +74,16 @@ public class Body
 		return others.stream().map(this::gravityFrom).reduce(RealVector::add)
 				.orElse(new ArrayRealVector(new double[] { 0, 0, 0 }));
 	}
+	
+	public void updateAcceleration(List<Body> others)
+	{
+		acl = gravityFrom(others).mapDivide(mass);
+	}
 
-	public void update_noGravity(double deltaTime)
+	public void updatePositionVelocity(double deltaTime)
 	{
 		pos = pos.add(vel.mapMultiply(deltaTime));
 		vel = vel.add(acl.mapMultiply(deltaTime));
-	}
-
-	public void update(double deltaTime, List<Body> others)
-	{
-		update_noGravity(deltaTime);
-		acl = gravityFrom(others).mapDivide(mass);
 	}
 
 	public RealVector getPos()
