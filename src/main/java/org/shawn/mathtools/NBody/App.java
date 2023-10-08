@@ -1,9 +1,5 @@
 package org.shawn.mathtools.NBody;
 
-/**
- * Hello world!
- *
- */
 public class App
 {
 	public static void main(String[] args)
