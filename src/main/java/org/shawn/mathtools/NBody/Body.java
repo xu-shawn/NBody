@@ -4,6 +4,9 @@ import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealVector;
 import java.util.*;
 
+import javafx.scene.shape.Circle;
+import javafx.scene.paint.Color;
+
 public class Body
 {
 	private RealVector pos;
@@ -12,6 +15,8 @@ public class Body
 
 	private double mass;
 	private double radius;
+	
+	private Circle dot;
 
 	public static final double G = 6.6743;
 
@@ -52,6 +57,7 @@ public class Body
 		this.vel = vel;
 		this.acl = acl;
 		this.mass = mass;
+		this.dot = new Circle(1, Color.ORANGE);
 	}
 
 	public double distanceFrom(Body other)
@@ -134,5 +140,10 @@ public class Body
 	public void setRadius(double radius)
 	{
 		this.radius = radius;
+	}
+
+	public Circle getDot()
+	{
+		return dot;
 	}
 }
