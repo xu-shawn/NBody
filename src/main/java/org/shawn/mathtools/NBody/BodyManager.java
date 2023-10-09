@@ -17,17 +17,14 @@ public class BodyManager
 	{
 		this.bodies = bodies;
 		this.currTime = 0;
+		this.updateInterval = updateInterval;
 	}
 	
 	public BodyManager(BodyManager other, double updateInterval)
 	{
 		this.bodies = new ArrayList<>(other.bodies);
 		this.currTime = 0;
-	}
-
-	public List<Body> getBodies()
-	{
-		return bodies;
+		this.updateInterval = updateInterval;
 	}
 	
 	public void update()
@@ -40,5 +37,20 @@ public class BodyManager
 		this.currTime += deltaTime;
 		bodies.stream().forEach(body -> body.updateAcceleration(this.bodies));
 		bodies.stream().forEach(body -> body.updatePositionVelocity(deltaTime));
+	}
+
+	public List<Body> getBodies()
+	{
+		return bodies;
+	}
+
+	public double getUpdateInterval()
+	{
+		return updateInterval;
+	}
+
+	public void setUpdateInterval(double updateInterval)
+	{
+		this.updateInterval = updateInterval;
 	}
 }
