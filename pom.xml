@@ -139,7 +139,7 @@
             <!-- Usage: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>a.a.App</mainClass>
+              <mainClass>org.shawn.mathtools.NBody.App</mainClass>
             </configuration>
           </execution>
         </executions>
