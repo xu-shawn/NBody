@@ -17,13 +17,14 @@ public class SimpleDisplay
 		}
 	}
 
-	private BodyManager bodies = new BodyManager();
+	private BodyManager bodies;
 	private Pixel[][] pixels;
 
 	public SimpleDisplay(int width, int height)
 	{
 		pixels = new Pixel[height][width];
 		Arrays.stream(pixels).forEach(line -> Arrays.fill(line, Pixel.Off));
+		bodies = new BodyManager(0);
 	}
 
 	public BodyManager getBodyManager()
