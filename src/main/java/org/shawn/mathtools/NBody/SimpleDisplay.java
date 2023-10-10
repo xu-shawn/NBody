@@ -58,7 +58,7 @@ public class SimpleDisplay
 
 	public String toString()
 	{
-		return Arrays.stream(pixels).map(line -> Arrays.stream(line)
+		return Arrays.stream(pixels).parallel().map(line -> Arrays.stream(line)
 				.map(pixel -> pixel.value.toString()).collect(Collectors.joining()))
 				.collect(Collectors.joining("\n"));
 	}

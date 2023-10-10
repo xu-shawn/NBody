@@ -15,7 +15,7 @@ public class App extends Application
 	private Pane root;
 	private Timeline timeline;
 	private Scene scene;
-	
+
 	@Override
 	public void start(Stage stage)
 	{
@@ -26,7 +26,7 @@ public class App extends Application
 
 		root = new Pane();
 		root.setStyle("-fx-background-color: black;");
-		
+
 		Random ran = new Random();
 
 		for (int i = 0; i < 40; i++)
@@ -42,8 +42,7 @@ public class App extends Application
 			root.getChildren().add(body.getDot());
 		});
 
-		timeline = new Timeline(
-				new KeyFrame(Duration.millis(0.1), event -> update(bodies)));
+		timeline = new Timeline(new KeyFrame(Duration.millis(0.1), event -> update(bodies)));
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.play();
 
@@ -55,9 +54,11 @@ public class App extends Application
 
 	private void update(BodyManager bodies)
 	{
+		double width = scene.getWidth() / 2;
+		double height = scene.getHeight() / 2;
 		bodies.update();
 		bodies.getBodies().stream().forEach(body -> body.getDot()
-				.relocate(body.getPos().getEntry(0) + scene.getWidth() / 2, body.getPos().getEntry(1) + scene.getHeight() / 2));
+				.relocate(body.getPos().getEntry(0) + width, body.getPos().getEntry(1) + height));
 	}
 
 	public static void main(String[] args)
