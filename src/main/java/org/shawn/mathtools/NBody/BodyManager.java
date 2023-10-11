@@ -7,31 +7,39 @@ public class BodyManager
 	List<Body> bodies;
 	double currTime;
 	double updateInterval;
-	
+
 	public BodyManager(double updateInterval)
 	{
 		this(new ArrayList<>(), updateInterval);
 	}
-	
+
 	public BodyManager(List<Body> bodies, double updateInterval)
 	{
 		this.bodies = bodies;
 		this.currTime = 0;
 		this.updateInterval = updateInterval;
 	}
-	
+
 	public BodyManager(BodyManager other, double updateInterval)
 	{
 		this.bodies = new ArrayList<>(other.bodies);
 		this.currTime = 0;
 		this.updateInterval = updateInterval;
 	}
-	
+
 	public void update()
 	{
 		update(updateInterval);
 	}
-	
+
+	public void multipleUpdates(int times)
+	{
+		for (int i = 0; i < times; i++)
+		{
+			update(updateInterval);
+		}
+	}
+
 	public void update(double deltaTime)
 	{
 		this.currTime += deltaTime;
