@@ -35,8 +35,7 @@ public class BodyManager
 	public void update(double deltaTime)
 	{
 		this.currTime += deltaTime;
-		bodies.parallelStream().forEach(body -> body.updateAcceleration(this.bodies));
-		bodies.parallelStream().forEach(body -> body.updatePositionVelocity(deltaTime));
+		bodies.parallelStream().forEach(body -> body.update(this.bodies, deltaTime));
 	}
 
 	public List<Body> getBodies()

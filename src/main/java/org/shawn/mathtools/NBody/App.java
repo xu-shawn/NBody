@@ -21,15 +21,12 @@ public class App extends Application
 	{
 		bodies = new BodyManager(0.001);
 
-		bodies.getBodies().add(new Body(10, 0, 0));
-		bodies.getBodies().add(new Body(-10, 0, 0));
-
 		root = new Pane();
 		root.setStyle("-fx-background-color: black;");
 
 		Random ran = new Random();
 
-		for (int i = 0; i < 40; i++)
+		for (int i = 0; i < 50; i++)
 		{
 			bodies.getBodies()
 					.add(new Body(700 * (ran.nextDouble() - 0.5), 700 * (ran.nextDouble() - 0.5), 0,

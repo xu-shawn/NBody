@@ -81,6 +81,13 @@ public class Body
 				.orElse(new ArrayRealVector(new double[] { 0, 0, 0 }));
 	}
 	
+	public void update(List<Body> others, double deltaTime)
+	{
+		acl = gravityFrom(others).mapDivide(mass);
+		pos = pos.add(vel.mapMultiply(deltaTime)).add(acl.mapMultiply(deltaTime * deltaTime / 2));
+		vel = vel.add(acl.mapMultiply(deltaTime));
+	}
+	
 	public void updateAcceleration(List<Body> others)
 	{
 		acl = gravityFrom(others).mapDivide(mass);
