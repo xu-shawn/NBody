@@ -3,11 +3,13 @@ package org.shawn.mathtools.NBody;
 import java.util.*;
 
 import javafx.animation.*;
+import javafx.scene.*;
 import javafx.application.Application;
-import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.event.EventHandler;
 
 public class App extends Application
 {
@@ -15,6 +17,8 @@ public class App extends Application
 	private Pane root;
 	private Timeline timeline;
 	private Scene scene;
+
+	private double scale = 1;
 
 	@Override
 	public void start(Stage stage)
@@ -44,6 +48,21 @@ public class App extends Application
 		timeline.play();
 
 		scene = new Scene(root, 640, 640);
+		scene.setOnKeyTyped((new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event)
+			{
+				if (event.getCharacter().equals("="))
+				{
+					scale *= 2;
+				}
+				else if (event.getCharacter().equals("-"))
+				{
+					scale /= 2;
+				}
+			}
+		}));
+
 		stage.setTitle("Moving Dots");
 		stage.setScene(scene);
 		stage.show();
@@ -54,8 +73,9 @@ public class App extends Application
 		double width = scene.getWidth() / 2;
 		double height = scene.getHeight() / 2;
 		bodies.update();
-		bodies.getBodies().stream().forEach(body -> body.getDot()
-				.relocate(body.getPos().getEntry(0) + width, body.getPos().getEntry(1) + height));
+		bodies.getBodies().stream()
+				.forEach(body -> body.getDot().relocate((body.getPos().getEntry(0) * scale + width),
+						(body.getPos().getEntry(1) * scale + height)));
 	}
 
 	public static void main(String[] args)
